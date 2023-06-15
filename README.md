@@ -1,4 +1,4 @@
-<img src="images/main.JPG" alt= “FragStatsPy”>
+<img src="images/main.TIF" alt= “FragStatsPy”>
 
 
 ## Python Wrapper for Fragstats
