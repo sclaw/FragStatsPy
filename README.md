@@ -13,3 +13,19 @@ Current functionality includes
 * Linking user-defined tiles
 * A general purpose SQL editor to allow for complete model manipulation (for savvy users)
 * Access to the Fragstats native run commands (command-line)
+
+## Example Code
+
+The code below will setup and run a Fragstats model to calculate the mean and standard deviation of patch sizes per user-defined region.
+```python
+import source.frag_model as fspy
+
+model = fspy.FragModel('model_py.fca')
+model.set_output_base_path('model_outputs')
+model.load_landscape_layer("geomorphic_patches.tif")
+model.set_user_provided_tiles("regions.tif")
+model.set_sampling_strategy(strategy='user_tiles', landscape=True)
+model.run_command('UPDATE frg_table_metrics SET value = "1" WHERE metric_name = "lAREA_MN"')
+model.run_command('UPDATE frg_table_metrics SET value = "1" WHERE metric_name = "lAREA_SD"')
+model.run_model()
+```
