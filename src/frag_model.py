@@ -2,6 +2,7 @@ import os
 import subprocess
 import shutil
 import sqlite3
+import pandas as pd
 from osgeo import gdal
 
 
@@ -52,6 +53,22 @@ class FragModel:
     def set_user_provided_tiles(self, path):
         string = f'{path}, x, 999, x, x, 1, x, IDF_GeoTIFF'
         self.db.execute(f'UPDATE frg_table_strings SET value = "{string}" WHERE string_name = "XUPT_GRID_INFO"')
+        self.db.commit()
+
+    def toggle_metric(self, level, metric, stat=None, on=True):
+        metric_name = f'{level.lower()}{metric.upper()}'
+        if stat:
+            metric_name = f'{metric_name}_{stat.upper()}'
+        if on:
+            value = 1
+        else:
+            value = 0
+
+        # Check if metric is valid
+        metric_row = self.db.execute(f'SELECT "Row Found" FROM frg_table_metrics WHERE metric_name = "{metric_name}"').fetchall()
+        assert len(metric_row) != 0, f"Metric {metric_name} is not a valid Fragstats metric"
+        
+        self.db.execute(f'UPDATE frg_table_metrics SET value = "{value}" WHERE metric_name = "{metric_name}"')
         self.db.commit()
     
     def run_command(self, command):
