@@ -26,6 +26,7 @@ model.load_landscape_layer("geomorphic_patches.tif")
 model.set_user_provided_tiles("regions.tif")
 model.set_sampling_strategy(strategy='user_tiles', landscape=True)
 model.toggle_metric(level='l', metric='AREA', stat='MN', on=True)
+model.toggle_metric(level='l', metric='AREA', stat='SD', on=True)
 model.run_model()
 results = model.get_results()
 ```
