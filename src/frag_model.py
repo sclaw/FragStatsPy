@@ -39,11 +39,12 @@ class FragModel:
             raise RuntimeError(f'Fragstats executable was not found at: {self.exe_path}\nPlease specify the fragstats executable path using the exe_path argument')
 
     def set_output_base_path(self, path):
-        self.db.execute(f'UPDATE frg_table_strings SET value = "{path}" WHERE string_name = "OUTPUT_FOLDER_PATH"')
+        self.base_path = path
+        self.db.execute(f'UPDATE frg_table_strings SET value = "{self.base_path}" WHERE string_name = "OUTPUT_FOLDER_PATH"')
         self.db.commit()
 
-    def set_sampling_strategy(self, strategy=None, cell=False, patch=False, landscape=False):        
-        for run, level in zip([cell, patch, landscape], ['CELL', 'PATCH', 'LANDS']):
+    def set_sampling_strategy(self, strategy=None, cell=False, patch=False, class_=False, landscape=False):        
+        for run, level in zip([cell, patch, class_, landscape], ['CELL', 'PATCH', 'CLASS', 'LANDS']):
             if run:
                 options_string = f'DO_{self.strategy_code_dict[strategy]}_{level}_LEVEL_STATS'
                 self.db.execute(f'UPDATE frg_table_options SET value = 1 WHERE option_name = "{options_string}"')
@@ -117,3 +118,12 @@ class FragModel:
         print('Running model')
         subprocess.run([self.exe_path, '/m', self.db_path])
 
+    def get_results(self):
+        out_dict = {'patch': None, 'class': None, 'land': None}
+        for level in out_dict:
+            tmp_path = f'{self.base_path}.{level}'
+            if os.path.exists(tmp_path):
+                out_dict[level] = pd.read_csv(tmp_path)
+            else:
+                out_dict[level] = None
+        return out_dict
