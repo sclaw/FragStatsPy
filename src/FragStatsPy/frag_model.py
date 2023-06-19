@@ -83,7 +83,7 @@ class FragModel:
             status = 1
         else:
             status = 0
-        self.db.execute(f'UPDATE frg_table_options SET value = "{status}" WHERE numeric_name = "GENERATE_PATCH_ID_FILE"')
+        self.db.execute(f'UPDATE frg_table_options SET value = "{status}" WHERE option_name = "GENERATE_PATCH_ID_FILE"')
         self.db.commit()
     
     def run_command(self, command):
