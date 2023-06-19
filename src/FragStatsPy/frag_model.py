@@ -30,7 +30,7 @@ class FragModel:
 
         if not os.path.exists(self.db_path):
             print(f'Initializing model at {self.db_path}')
-            shutil.copyfile(os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', 'model_template.db')), self.db_path)
+            shutil.copyfile(os.path.abspath(os.path.join(os.path.dirname( __file__ ), 'model_template.db')), self.db_path)
         
         self.db = sqlite3.connect(self.db_path)
 
