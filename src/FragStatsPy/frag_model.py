@@ -77,6 +77,14 @@ class FragModel:
             raise RuntimeError('Neighborhood rule must be 4 or 8')
         self.db.execute(f'UPDATE frg_table_numerics SET value = "{rule}" WHERE numeric_name = "NEIGHBORHOOD_RULE"')
         self.db.commit()
+
+    def generate_patch_id_file(self, generate=True):
+        if generate:
+            status = 1
+        else:
+            status = 0
+        self.db.execute(f'UPDATE frg_table_options SET value = "{status}" WHERE numeric_name = "GENERATE_PATCH_ID_FILE"')
+        self.db.commit()
     
     def run_command(self, command):
         self.db.execute(command)
