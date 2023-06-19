@@ -123,7 +123,9 @@ class FragModel:
         for level in out_dict:
             tmp_path = f'{self.base_path}.{level}'
             if os.path.exists(tmp_path):
-                out_dict[level] = pd.read_csv(tmp_path)
+                tmp_df = pd.read_csv(tmp_path)
+                tmp_df.columns = tmp_df.columns.str.replace(' ', '')
+                out_dict[level] = tmp_df
             else:
                 out_dict[level] = None
         return out_dict
