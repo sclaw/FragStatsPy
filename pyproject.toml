@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "FragStatsPy"
-version = "0.0.1"
+version = "0.0.2"
 description = "A Python wrapper for Fragstats."
 readme = "README.md"
 authors = [{ name = "Scott Lawson", email = "scott.lawson@uvm.edu" }]
