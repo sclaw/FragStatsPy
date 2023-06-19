@@ -71,6 +71,12 @@ class FragModel:
         
         self.db.execute(f'UPDATE frg_table_metrics SET value = "{value}" WHERE metric_name = "{metric_name}"')
         self.db.commit()
+
+    def neighborhood_rule(self, rule):
+        if rule != 4 and rule != 8:
+            raise RuntimeError('Neighborhood rule must be 4 or 8')
+        self.db.execute(f'UPDATE frg_table_numerics SET value = "{rule}" WHERE numeric_name = "NEIGHBORHOOD_RULE"')
+        self.db.commit()
     
     def run_command(self, command):
         self.db.execute(command)
