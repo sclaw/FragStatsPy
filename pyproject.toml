@@ -1,0 +1,29 @@
+# pyproject.toml
+
+[build-system]
+requires      = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "FragStatsPy"
+version = "0.0.1"
+description = "A Python wrapper for Fragstats."
+readme = "README.md"
+authors = [{ name = "Scott Lawson", email = "scott.lawson@uvm.edu" }]
+license = { file = "LICENSE" }
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+]
+keywords = ["Landsacape metrics", "spatial statistics", "fragstats"]
+dependencies = [
+    "pandas",
+]
+requires-python = ">=3.9"
+
+[project.optional-dependencies]
+dev = ["gdal"]
+
+[project.urls]
+Homepage = "https://github.com/sclaw/FragStatsPy"
