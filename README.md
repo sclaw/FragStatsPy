@@ -30,3 +30,10 @@ model.toggle_metric(level='l', metric='AREA', stat='SD', on=True)
 model.run_model()
 results = model.get_results()
 ```
+
+## Funding
+
+Funding for this project was provided by the National Oceanic & Atmospheric
+Administration (NOAA), awarded to the Cooperative Institute for Research to
+Operations in Hydrology (CIROH) through the NOAA Cooperative Agreement
+with the University of Alabama (NA22NWS4320003).
