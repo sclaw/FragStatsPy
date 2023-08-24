@@ -31,6 +31,14 @@ model.run_model()
 results = model.get_results()
 ```
 
+## Installation
+
+`FragStatsPy` can be installed using pip:
+	
+    $ python3 -m pip install FragStatsPy
+
+Conda may come soon, if there's interest.
+
 ## Funding
 
 Funding for this project was provided by the National Oceanic & Atmospheric
